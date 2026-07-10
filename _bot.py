@@ -34,6 +34,7 @@ bot = PrimaBot(
 bot.add_extensions(
     "alias",
     "autorole",
+    "avif",
     "ban",
     "brainfuck",
     "calc",

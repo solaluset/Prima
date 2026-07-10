@@ -61,7 +61,7 @@ def _translate_permissions(permissions: Iterable[str], language: str) -> str:
 
 ERRORS = {
     commands.CommandNotFound: None,
-    commands.MissingRequiredArgument: lambda ctx, error: ctx.send_help(ctx.command),
+    commands.UserInputError: lambda ctx, error: ctx.send_help(ctx.command),
     commands.NoPrivateMessage: "errors.guild_only",
     commands.NotOwner: "errors.owner_only",
     commands.UserNotFound: "errors.not_found.user",

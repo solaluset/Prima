@@ -10,3 +10,5 @@ ring==0.10.1
 regex==2026.6.28
 # translations
 i18nice[YAML]==0.16.0
+# for conversions with ffmpeg
+aiofiles==25.1.0

@@ -128,6 +128,15 @@ autorole:
     removed: "Autorole was removed."
   reason: "autorole"
 
+avif:
+  help: Converts gif or video into avif
+  starting: Starting conversion (this takes some time)...
+  progress: Converting... (%{percent}%%)
+  done: Done.
+  unknown-duration: unknown
+  file-too-big: Provided file is too big.
+  failed: Conversion failed. Perhaps the file is invalid.
+
 ban:
   help: |
     Bans a user
