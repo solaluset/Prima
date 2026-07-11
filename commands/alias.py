@@ -145,9 +145,9 @@ class Aliases(commands.Cog):
             language = await self.bot.get_language(message.guild)
             name = getattr(e, "name", e.args[0])
             await message.channel.send(t("alias.invalid_id", language, id=name))
-        except Exception:
-            pass
-        return None
+            return None
+        except IndexError:
+            return "dirty workaround"
 
 
 async def setup(bot):
