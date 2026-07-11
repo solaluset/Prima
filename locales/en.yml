@@ -129,7 +129,7 @@ autorole:
   reason: "autorole"
 
 avif:
-  help: Converts gif or video into avif
+  help: Converts pictures, GIFs and videos into AVIFs
   starting: Starting conversion (this takes some time)...
   progress: Converting... (%{percent}%%)
   done: Done.
