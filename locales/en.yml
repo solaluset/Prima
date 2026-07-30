@@ -391,3 +391,27 @@ banner:
   profile_color:
     zero: "Profile color not specified."
     one: "Profile color: %{color}"
+
+code_execution:
+  errors:
+    file_too_big: "Source file is too big (%{size}>%{max_size})."
+    file_decode_failed: "Source file does not contain valid UTF-8 text."
+    file_empty: "The file is empty."
+    missing_codeblock: "The message does not contain codeblock."
+    language_not_supported: "Unknown language."
+    api_error: "Failed to get response from server."
+  results:
+    no_output: "Your %{language_info} code ran without output."
+    compile_error: "Got %{language_info} compile errors:"
+    stderr_only: "Got only %{language_info} error output:"
+    output: "Here is your %{language_info} output:"
+
+yabi:
+  help: |
+    Runs YABI (Bython) code
+    Example:
+    %{prefix}yabi \`\`\`
+    text = input(); for _ in range(5) { print(text) }
+    \`\`\`
+    Hello
+  usage: "<codeblock or file>"

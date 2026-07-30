@@ -390,3 +390,27 @@ banner:
   profile_color:
     zero: "Колір профілю не вказано."
     one: "Колір профілю: %{color}"
+
+code_execution:
+  errors:
+    file_too_big: "Файл коду завеликий (%{size}>%{max_size})."
+    file_decode_failed: "Файл коду не містить коректний UTF-8 текст."
+    file_empty: "Файл порожній."
+    missing_codeblock: "Повідомлення не містить блок коду."
+    language_not_supported: "Невідома мова."
+    api_error: "Не вдалося отримати відповідь від сервера."
+  results:
+    no_output: "Ваш код %{language_info} виконано без виводу."
+    compile_error: "Отримано помилки компіляції %{language_info}:"
+    stderr_only: "Отримано лише вивід помилки %{language_info}:"
+    output: "Ось Ваш вивід %{language_info}:"
+
+yabi:
+  help: |
+    Виконує код YABI (Bython)
+    Приклад:
+    %{prefix}yabi \`\`\`
+    text = input(); for _ in range(5) { print(text) }
+    \`\`\`
+    Привіт
+  usage: "<блок коду або файл>"
