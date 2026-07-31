@@ -95,7 +95,7 @@ class CodeExecution(commands.Cog):
         # Store the supported languages and aliases
         self.languages: dict[str, Language] = {}
 
-    async def cog_load(self):
+    async def cog_load(self) -> None:
         async with self.bot.session.get(self.endpoint + "/runtimes") as response:
             runtimes = await response.json()
         for runtime in runtimes:
@@ -204,7 +204,7 @@ class CodeExecution(commands.Cog):
 
         return result + END
 
-    async def expire_reply(self, message_id: int):
+    async def expire_reply(self, message_id: int) -> None:
         await asyncio.sleep(REPLY_TTL)
         del self.processed_messages[message_id]
 
