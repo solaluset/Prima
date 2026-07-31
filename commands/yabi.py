@@ -175,7 +175,7 @@ class CodeExecution(commands.Cog):
             introduction = "code_execution.results.no_output"
         introduction = t(introduction, user_language, language_info=language_info)
 
-        if msg := api_response.get("message"):
+        if msg := run["message"]:
             introduction = f"{introduction}\n{msg}"
 
         output = f"{compile_stderr}{run['output']}"
