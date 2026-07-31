@@ -26,6 +26,7 @@ SOFTWARE.
 """
 
 import os
+import re
 import asyncio
 from traceback import print_exc
 from dataclasses import dataclass
@@ -131,6 +132,7 @@ class CodeExecution(commands.Cog):
         output_syntax = output_syntax.strip()
         extension = extension.strip()
         args = args.splitlines()
+        stdin = stdin.lstrip()
 
         return ExecutionParams(language or extension, output_syntax, source, args, stdin)
 
@@ -217,11 +219,15 @@ class CodeExecution(commands.Cog):
                 break
         else:
             return content
+
         # remove command
-        content = content.split(None, 1)
-        if len(content) < 2:
+        space = re.search(r"\s+", content)
+        if not space:
             return ""
-        return content[1]
+        _, space, content = content.partition(space.group())
+        if "\n" in space:
+            content = "\n" + content
+        return content
 
     async def process_message(self, message: Message) -> str:
         source = await self._strip_command(message)
