@@ -279,7 +279,7 @@ class CodeExecution(commands.Cog):
 
     @commands.Cog.listener()
     async def on_message_delete(self, message: Message) -> None:
-        reply = self.processed_messages.pop(message.id)
+        reply = self.processed_messages.pop(message.id, None)
         if reply is None:
             return
         reply.remove_task.cancel()
