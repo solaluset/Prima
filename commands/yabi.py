@@ -294,7 +294,7 @@ class CodeExecution(commands.Cog):
         except MessageNotFound:
             del self.processed_messages[before.id]
         else:
-            reply.remove_task = asyncio.create_task(self.expire_reply(after.message.id))
+            reply.remove_task = asyncio.create_task(self.expire_reply(after.id))
 
 
 async def setup(bot: PrimaBot) -> None:
