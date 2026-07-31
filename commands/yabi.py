@@ -219,7 +219,10 @@ class CodeExecution(commands.Cog):
         else:
             return content
         # remove command
-        return content.split(None, 1)[1]
+        content = content.split(None, 1)
+        if len(content) < 2:
+            return ""
+        return content[1]
 
     async def process_message(self, message: Message) -> str:
         source = await self._strip_command(message)
