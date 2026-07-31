@@ -288,16 +288,13 @@ class CodeExecution(commands.Cog):
         if reply is None:
             return
         reply.remove_task.cancel()
-        async with after.channel.typing():
-            new_content = await self.process_message(after)
-            try:
-                await reply.message.edit(content=new_content)
-            except MessageNotFound:
-                del self.processed_messages[before.id]
-            else:
-                reply.remove_task = asyncio.create_task(
-                    self.expire_reply(after.message.id)
-                )
+        new_content = await self.process_message(after)
+        try:
+            await reply.message.edit(content=new_content)
+        except MessageNotFound:
+            del self.processed_messages[before.id]
+        else:
+            reply.remove_task = asyncio.create_task(self.expire_reply(after.message.id))
 
 
 async def setup(bot: PrimaBot) -> None:
