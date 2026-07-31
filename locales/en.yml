@@ -398,7 +398,7 @@ code_execution:
     file_decode_failed: "Source file does not contain valid UTF-8 text."
     file_empty: "The file is empty."
     missing_codeblock: "The message does not contain codeblock."
-    language_not_supported: "Unknown language."
+    language_not_supported: "Unknown language %{language}."
     api_error: "Failed to get response from server."
   results:
     no_output: "Your %{language_info} code ran without output."

@@ -164,28 +164,27 @@ class CodeExecution(commands.Cog):
 
         language_info = f"{api_response['language']}({api_response['version']})"
 
-        # Return early if no output was received
-        if not compile_stderr and not run["output"]:
-            return t(
-                "code_execution.results.no_output",
-                user_language,
-                language_info=language_info,
-            )
-
         if compile_stderr:
             introduction = "code_execution.results.compile_error"
             compile_stderr += "\n"
         elif not run["stdout"] and run["stderr"]:
             introduction = "code_execution.results.stderr_only"
-        else:
+        elif run["output"]:
             introduction = "code_execution.results.output"
+        else:
+            introduction = "code_execution.results.no_output"
         introduction = t(introduction, user_language, language_info=language_info)
 
-        if api_response["message"]:
-            introduction = f"{introduction}\n{api_response['message']}"
+        if msg := api_response.get("message"):
+            introduction = f"{introduction}\n{msg}"
+
+        output = f"{compile_stderr}{run['output']}"
+
+        if not output:
+            return introduction
 
         # Limit output to 30 lines maximum
-        output = "\n".join(f"{compile_stderr}{run['output']}".splitlines()[:30])
+        output = "\n".join(output.splitlines()[:30])
 
         # Remove null bytes
         output = output.replace("\0", "")
@@ -249,7 +248,11 @@ class CodeExecution(commands.Cog):
         if not params.language:
             params.language = "yabi"
         if params.language not in self.languages:
-            return t("code_execution.errors.language_not_supported", user_language)
+            return t(
+                "code_execution.errors.language_not_supported",
+                user_language,
+                language=params.language,
+            )
 
         try:
             response = await self.call_api(params)
