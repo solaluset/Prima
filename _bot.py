@@ -56,6 +56,7 @@ bot.add_extensions(
     "server",
     "tictac",
     "user",
+    "yabi",
     package="commands",
 )
 

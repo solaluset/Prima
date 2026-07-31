@@ -36,6 +36,10 @@ DEFAULT_CONFIG = {
     "prefix": ["p1", "P1"],
     "default_language": "en",
     "support_invite": "",
+    "piston": {
+        "endpoint": "",
+        "token": "",
+    },
 }
 
 
