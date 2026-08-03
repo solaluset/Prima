@@ -28,7 +28,7 @@ SOFTWARE.
 import os
 import re
 import asyncio
-from traceback import print_exc
+from traceback import print_exc, print_exception
 from dataclasses import dataclass
 
 from discord import Attachment, Message, NotFound as MessageNotFound
@@ -96,6 +96,12 @@ class CodeExecution(commands.Cog):
         self.languages: dict[str, Language] = {}
 
     async def cog_load(self) -> None:
+        self._fetch_languages_task = asyncio.create_task(self._fetch_languages())
+        self._fetch_languages_task.add_done_callback(
+            lambda t: print_exception(t.exception()) if t.exception() else None
+        )
+
+    async def _fetch_languages(self) -> None:
         async with self.bot.session.get(self.endpoint + "/runtimes") as response:
             runtimes = await response.json()
         for runtime in runtimes:
@@ -103,6 +109,19 @@ class CodeExecution(commands.Cog):
             self.languages[language.name] = language
             for alias in runtime["aliases"]:
                 self.languages[alias] = language
+
+    async def cog_check(self, ctx) -> bool:
+        if self._fetch_languages_task.done() and self._fetch_languages_task.exception():
+            # retry
+            self._fetch_languages_task = asyncio.create_task(self._fetch_languages())
+        if not self._fetch_languages_task.done():
+            async with ctx.typing():
+                try:
+                    await self._fetch_languages_task
+                except Exception:
+                    await ctx.send(t("code_execution.errors.api_error", ctx.language))
+                    return False
+        return True
 
     async def parse_execution_params(
         self, content: str, file: Attachment | None
