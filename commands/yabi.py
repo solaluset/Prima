@@ -186,7 +186,12 @@ class CodeExecution(commands.Cog):
         )
         run = api_response["run"]
 
-        language_info = f"{api_response['language']}({api_response['version']})"
+        language = api_response["language"]
+        language_info = f"{language}({api_response['version']})"
+        if (runtime := api_response.get("runtime", language)) != language:
+            language_info = (
+                f"{language_info} @ {runtime}({api_response['runtime_version']})"
+            )
 
         if compile_stderr:
             introduction = "code_execution.results.compile_error"
