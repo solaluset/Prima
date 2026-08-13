@@ -162,10 +162,7 @@ class CodeExecution(commands.Cog):
         data = {
             "language": language.name,
             "version": language.version,
-            # TODO: main.by is simple workaround for YABI
-            # (extension is important)
-            # remake this if needed
-            "files": [{"name": "main.by", "content": params.source}],
+            "files": [{"content": params.source}],
             "args": params.args,
             "stdin": params.stdin,
         }
