@@ -7,7 +7,7 @@ SQLAlchemy[asyncio]==2.1.0
 asyncpg==0.31.0
 ring==0.10.1
 # aliases
-regex==2026.9.10
+regex==2026.9.29
 # translations
 i18nice[YAML]==0.16.0
 # for conversions with ffmpeg
