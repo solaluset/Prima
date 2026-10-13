@@ -1,7 +1,7 @@
 # bot
 discord.py[speed]==2.7.1
 discord-py-paginators==0.3.0
-aiohttp==3.14.3
+aiohttp==3.14.4
 # database
 SQLAlchemy[asyncio]==2.1.2
 asyncpg==0.31.0
